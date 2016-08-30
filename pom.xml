@@ -7,7 +7,25 @@
     <packaging>jar</packaging>
 
     <name>guava-cache-redis</name>
+    <description>implement guava cache interface backed by redis</description>
     <url>https://github.com/levyfan/guava-cache-redis</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>levyfan</id>
+            <name>Fan Liwen</name>
+            <url>https://github.com/levyfan</url>
+            <email>levyfan@163.com</email>
+        </developer>
+    </developers>
 
     <scm>
         <url>https://github.com/levyfan/guava-cache-redis</url>
