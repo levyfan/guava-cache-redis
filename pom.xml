@@ -3,7 +3,7 @@
 
     <groupId>com.github.levyfan</groupId>
     <artifactId>guava-cache-redis</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.2</version>
     <packaging>jar</packaging>
 
     <name>guava-cache-redis</name>
@@ -31,7 +31,7 @@
         <url>https://github.com/levyfan/guava-cache-redis</url>
         <connection>scm:git:https://github.com/levyfan/guava-cache-redis.git</connection>
         <developerConnection>scm:git:https://github.com/levyfan/guava-cache-redis.git</developerConnection>
-        <tag>guava-cache-redis-0.0.1</tag>
+        <tag>guava-cache-redis-0.0.2</tag>
     </scm>
 
     <distributionManagement>
