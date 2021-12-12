@@ -145,6 +145,9 @@ public class RedisCache<K, V> extends AbstractLoadingCache<K, V> implements Load
             keysvalues.add(Bytes.concat(keyPrefix, keySerializer.serialize(entry.getKey())));
             keysvalues.add(valueSerializer.serialize(entry.getValue()));
         }
+        if (keysvalues.isEmpty()) {
+            return;
+        }
 
         try (Jedis jedis = jedisPool.getResource()) {
             if (expiration > 0) {
