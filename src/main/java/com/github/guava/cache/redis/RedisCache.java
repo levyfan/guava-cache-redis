@@ -20,6 +20,7 @@ import com.google.common.collect.Sets;
 import com.google.common.primitives.Bytes;
 import com.google.common.util.concurrent.ExecutionError;
 import com.google.common.util.concurrent.UncheckedExecutionException;
+import redis.clients.jedis.Response;
 
 /**
  * @author fanliwen
@@ -146,12 +147,11 @@ public class RedisCache<K, V> extends AbstractLoadingCache<K, V> implements Load
         try (Jedis jedis = jedisPool.getResource()) {
             if (expiration > 0) {
                 Pipeline pipeline = jedis.pipelined();
-                pipeline.multi();
                 jedis.mset(Iterables.toArray(keysvalues, byte[].class));
                 for (int i = 0; i < keysvalues.size(); i += 2) {
-                    jedis.expire(keysvalues.get(i), expiration);
+                    pipeline.expire(keysvalues.get(i), (long)(expiration));
                 }
-                pipeline.exec();
+                pipeline.sync();
             } else {
                 jedis.mset(Iterables.toArray(keysvalues, byte[].class));
             }
