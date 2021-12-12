@@ -102,10 +102,9 @@ public class RedisCache<K, V> extends AbstractLoadingCache<K, V> implements Load
         for (Object key : keys) {
             keyBytes.add(Bytes.concat(keyPrefix, keySerializer.serialize(key)));
         }
-
+        Map<K, V> map = new LinkedHashMap<>();
         try (Jedis jedis = jedisPool.getResource()) {
             List<byte[]> valueBytes = jedis.mget(Iterables.toArray(keyBytes, byte[].class));
-            Map<K, V> map = new LinkedHashMap<>();
             if (valueBytes != null) {
                 int i = 0;
                 for (Object key : keys) {
@@ -118,8 +117,11 @@ public class RedisCache<K, V> extends AbstractLoadingCache<K, V> implements Load
                     i++;
                 }
             }
-            return ImmutableMap.copyOf(map);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return ImmutableMap.copyOf(map);
+
     }
 
     @Override
