@@ -104,14 +104,18 @@ public class RedisCache<K, V> extends AbstractLoadingCache<K, V> implements Load
 
         try (Jedis jedis = jedisPool.getResource()) {
             List<byte[]> valueBytes = jedis.mget(Iterables.toArray(keyBytes, byte[].class));
-
             Map<K, V> map = new LinkedHashMap<>();
-            int i = 0;
-            for (Object key : keys) {
-                @SuppressWarnings("unchecked")
-                K castKey = (K) key;
-                map.put(castKey, valueSerializer.<V>deserialize(valueBytes.get(i)));
-                i++;
+            if (valueBytes != null) {
+                int i = 0;
+                for (Object key : keys) {
+                    @SuppressWarnings("unchecked")
+                    K castKey = (K) key;
+                    byte[] bytes = valueBytes.get(i);
+                    if (bytes != null) {
+                        map.put(castKey, valueSerializer.<V>deserialize(bytes));
+                    }
+                    i++;
+                }
             }
             return ImmutableMap.copyOf(map);
         }
