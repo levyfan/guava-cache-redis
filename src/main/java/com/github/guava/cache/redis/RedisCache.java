@@ -131,7 +131,7 @@ public class RedisCache<K, V> extends AbstractLoadingCache<K, V> implements Load
 
         try (Jedis jedis = jedisPool.getResource()) {
             if (expiration > 0) {
-                jedis.setex(keyBytes, expiration, valueBytes);
+                jedis.setex(keyBytes, (long)expiration, valueBytes);
             } else {
                 jedis.set(keyBytes, valueBytes);
             }
