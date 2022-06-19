@@ -1,15 +1,29 @@
-*.class
+# Eclipse project files
+.settings
+.classpath
+.project
+.metadata
+.mymetadata
+.springBeans
+.externalToolBuilders
+.gradle
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-
+# IntelliJ Idea project files
 .idea
+.idea/*
 *.iml
+*.ipr
+*.iws
+
+# Always ignore these directories/files
+target
+build
+*/target/*
+logs
+bin
+root/xms/artifacts
+test-output
+
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
