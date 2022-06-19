@@ -1,0 +1,36 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.palantir.gradle.gitversion:gradle-git-version:0.15.0"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: "com.palantir.git-version"
+apply plugin: 'java'
+apply plugin: 'idea'
+
+
+group = 'com.unidev.guava-cache-redis'
+version gitVersion()
+
+
+dependencies {
+    implementation 'com.google.guava:guava:19.0'
+    implementation 'redis.clients:jedis:3.6.3'
+    implementation 'org.apache.commons:commons-lang3:3.4'
+    testImplementation 'junit:junit:4.12'
+}
+
+test {
+    useJUnitPlatform()
+}
+
